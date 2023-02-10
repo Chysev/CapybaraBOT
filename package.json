@@ -7,7 +7,7 @@
   "author": "Chysev",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"yarn tsc --watch\" \"nodemon .\"",
+    "dev": "nodemon --watch src --ext ts --exec 'tsc && node build/_app.js'",
     "build": "tsc",
     "rebuild": "rm -rf build && tsc",
     "test": "node build/_app.js",
@@ -15,7 +15,6 @@
     "down": "pm2 stop build/_app.js"
   },
   "devDependencies": {
-    "concurrently": "^7.6.0",
     "nodemon": "^2.0.20",
     "pm2": "^5.2.2",
     "prettier": "^2.8.3"
