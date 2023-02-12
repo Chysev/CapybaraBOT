@@ -1,6 +1,4 @@
-import { Player } from "erela.js";
 import { Events, Message } from "discord.js";
-import Manager from "../connections/manager";
 import client from "../handlers/clientHandler";
 
 export = {
@@ -8,12 +6,6 @@ export = {
   execute: async (message: Message) => {
     if (!message.content.startsWith(process.env.PREFIX) || message.author.bot)
       return;
-
-    const connection: Player = Manager.create({
-      guild: message.guild.id,
-      voiceChannel: message.member.voice.channel.id,
-      textChannel: message.channel.id,
-    });
 
     const args: string[] = message.content
       .slice(process.env.PREFIX.length)
@@ -37,7 +29,7 @@ export = {
           (commands: any) =>
             commands.aliases && commands.aliases.includes(command)
         );
-      execute_commands.execute(client, message, args, connection, Manager);
+      execute_commands.execute(client, message, args);
     } catch (error) {
       console.error(error);
       await message.reply("There was an error trying to execute that command!");
