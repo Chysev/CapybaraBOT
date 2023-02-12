@@ -6,13 +6,15 @@ import {
   ButtonBuilder,
   ActionRowBuilder,
 } from "discord.js";
+import { Player } from "erela.js";
 import ytSearch from "yt-search";
 import "../../connections/muiscPlayer";
+import Manager from "../../connections/manager";
 
 export = {
   name: "play",
   aliases: ["pl"],
-  execute: async (client, message: Message, args, connection, Manager) => {
+  execute: async (client, message: Message, args) => {
     Manager.on("trackStart", async (player, track: any) => {
       const channel = client.channels.cache.get(player.textChannel);
       try {
@@ -201,6 +203,12 @@ export = {
 
     if (res.loadType === "NO_MATCHES")
       return message.reply("There was no tracks found in the server");
+
+    const connection: Player = Manager.create({
+      guild: message.guild.id,
+      voiceChannel: message.member.voice.channel.id,
+      textChannel: message.channel.id,
+    });
 
     connection.connect();
 
