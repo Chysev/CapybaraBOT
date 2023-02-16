@@ -17,4 +17,14 @@ const commandsGeneralPath: string = path.join(__dirname, "../commands/general"),
   ),
   commandsAdminPath: string = path.join(__dirname, "../commands/admin");
 
+const commandPaths: string[] = [
+  commandsGeneralPath,
+  commandsMusicPath,
+  commandsMusicCommandsPath,
+  commandsMusicFiltersPath,
+  commandsOwnerPath,
+  commandsModerationPath,
+  commandsAdminPath,
+];
+
 export default commandPaths;
