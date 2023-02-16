@@ -1,7 +1,7 @@
-import databaseLevelUp from "../connections/databaseLevelUp";
 import DataTypes from "sequelize";
-import { Events } from "discord.js";
+import { Events, Message } from "discord.js";
 import client from "../handlers/clientHandler";
+import databaseLevelUp from "../connections/databaseLevelUp";
 
 const UserLevel = databaseLevelUp.define("user_level", {
   id: {
@@ -30,7 +30,7 @@ async function addExperience(userId, experience) {
 
 let previousLevel = 0;
 
-client.on(Events.MessageCreate, async (message) => {
+client.on(Events.MessageCreate, async (message: Message) => {
   const userId = message.author.id;
   addExperience(userId, 20);
 
