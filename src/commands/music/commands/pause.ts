@@ -1,10 +1,10 @@
 import { Player } from "erela.js";
 import { Message } from "discord.js";
-import Manager from "../../connections/manager";
+import Manager from "../../../connections/manager";
 
 export = {
-  name: "skip",
-  aliases: ["hop"],
+  name: "pause",
+  aliases: ["wait", "breakoff", "rest", "break"],
   execute: async (client, message: Message, args) => {
     // If the use is not in the voice channel then this command is not avaialble
     if (!message.member.voice.channel)
@@ -16,21 +16,16 @@ export = {
       textChannel: message.channel.id,
     });
 
-    // If music is playing then user can skip
-    if (connection.playing) {
+    // If the music or audio is not paused then user can pause
+    if (connection.paused) {
       try {
-        connection.stop();
+        connection.pause(false);
         await message.channel.send(
-          "The music skipped by: " + message.author.username
+          "The music is unpaused by: " + message.author.username
         );
-        console.log("The music skipped by: " + message.author.username);
       } catch (error) {
         console.log(error);
       }
-
-      // If not then user cannot skip
-    } else {
-      await message.channel.send("I am not playing any music or audio");
     }
   },
 };

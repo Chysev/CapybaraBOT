@@ -8,8 +8,8 @@ import {
 } from "discord.js";
 import { Player } from "erela.js";
 import ytSearch from "yt-search";
-import "../../connections/muiscPlayer";
-import Manager from "../../connections/manager";
+import "../../../connections/muiscPlayer";
+import Manager from "../../../connections/manager";
 
 export = {
   name: "play",

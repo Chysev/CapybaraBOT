@@ -1,12 +1,12 @@
 import { Player } from "erela.js";
 import { Message } from "discord.js";
-import Manager from "../../connections/manager";
+import Manager from "../../../connections/manager";
 
 export = {
-  name: "join",
-  aliases: ["in"],
+  name: "leave",
+  aliases: ["out"],
   execute: async (client, message: Message, args) => {
-    // If the user is in the voice call then bot can join
+    // If the user is in the voice channel then bot can leave
     if (message.member.voice.channel) {
       try {
         const connection: Player = Manager.create({
@@ -14,14 +14,13 @@ export = {
           voiceChannel: message.member.voice.channel.id,
           textChannel: message.channel.id,
         });
-        connection.connect();
-        await message.reply("I joined in the call and dont left me hanging");
+        connection.destroy();
       } catch (error) {
         console.log(error);
       }
-      // If not bot cannot join
+      // If not bot connot leave
     } else {
-      await message.reply("Join voice call and try again bro");
+      await message.reply("We are not in the voice call you stoopid");
     }
   },
 };

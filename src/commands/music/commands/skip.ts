@@ -1,10 +1,10 @@
 import { Player } from "erela.js";
 import { Message } from "discord.js";
-import Manager from "../../connections/manager";
+import Manager from "../../../connections/manager";
 
 export = {
-  name: "loop",
-  aliases: ["again", "arc"],
+  name: "skip",
+  aliases: ["hop"],
   execute: async (client, message: Message, args) => {
     // If the use is not in the voice channel then this command is not avaialble
     if (!message.member.voice.channel)
@@ -16,22 +16,21 @@ export = {
       textChannel: message.channel.id,
     });
 
-    // If the music is looped then user can unloop
-    if (connection.queueRepeat) {
+    // If music is playing then user can skip
+    if (connection.playing) {
       try {
-        connection.setQueueRepeat(false);
+        connection.stop();
         await message.channel.send(
-          "The music unlooped by: " + message.author.username
+          "The music skipped by: " + message.author.username
         );
+        console.log("The music skipped by: " + message.author.username);
       } catch (error) {
         console.log(error);
       }
-      // If the music is not looped then user can loop
+
+      // If not then user cannot skip
     } else {
-      connection.setQueueRepeat(true);
-      await message.channel.send(
-        "The music looped by: " + message.author.username
-      );
+      await message.channel.send("I am not playing any music or audio");
     }
   },
 };

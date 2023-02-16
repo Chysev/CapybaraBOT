@@ -1,10 +1,10 @@
 import { Player } from "erela.js";
 import { Message } from "discord.js";
-import Manager from "../../connections/manager";
+import Manager from "../../../connections/manager";
 
 export = {
-  name: "stop",
-  aliases: ["end", "terminate"],
+  name: "resume",
+  aliases: ["wait", "breakoff", "rest", "break"],
   execute: async (client, message: Message, args) => {
     // If the use is not in the voice channel then this command is not avaialble
     if (!message.member.voice.channel)
@@ -16,21 +16,16 @@ export = {
       textChannel: message.channel.id,
     });
 
-    // If music is playing then user can stop
-    if (connection.playing) {
+    // If the music or audio is paused then user can resume
+    if (!connection.paused) {
       try {
-        connection.destroy();
+        connection.pause(true);
         await message.channel.send(
-          "The music stopped by: " + message.author.username
+          "The music resumed by: " + message.author.username
         );
-        console.log("The music stopped by: " + message.author.username);
       } catch (error) {
         console.log(error);
       }
-
-      // If not then user cannot stop
-    } else {
-      await message.channel.send("I am not playing any music or audio");
     }
   },
 };
