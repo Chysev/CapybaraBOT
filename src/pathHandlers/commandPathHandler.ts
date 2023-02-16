@@ -2,6 +2,14 @@ import path from "path";
 
 const commandsGeneralPath: string = path.join(__dirname, "../commands/general"),
   commandsMusicPath: string = path.join(__dirname, "../commands/music"),
+  commandsMusicCommandsPath: string = path.join(
+    __dirname,
+    "../commands/music/commands"
+  ),
+  commandsMusicFiltersPath: string = path.join(
+    __dirname,
+    "../commands/music/filters"
+  ),
   commandsOwnerPath: string = path.join(__dirname, "../commands/owner"),
   commandsModerationPath: string = path.join(
     __dirname,
@@ -12,6 +20,8 @@ const commandsGeneralPath: string = path.join(__dirname, "../commands/general"),
 const commandPaths: string[] = [
   commandsGeneralPath,
   commandsMusicPath,
+  commandsMusicCommandsPath,
+  commandsMusicFiltersPath,
   commandsOwnerPath,
   commandsModerationPath,
   commandsAdminPath,
