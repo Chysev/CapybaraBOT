@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "build/_app.js",
   "private": true,
-  "module": "ES6",
   "author": "Chysev",
   "license": "MIT",
   "scripts": {
