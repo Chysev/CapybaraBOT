@@ -54,7 +54,7 @@
 - Finish the configuration how you like
 - `Run this command: yarn build`
 - `Run this command: yarn up` - Production
-- Invite your bot to your server
+- Invite the bot to your server
 
 #### This command if for Development | If you wanna change, test and rebuild the bot
 
